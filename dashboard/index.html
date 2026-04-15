@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSpeak Command Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="top-bar">
+            <div class="brand">
+                <div class="logo-pulse"></div>
+                <h1>NEURO<span>SPEAK</span></h1>
+            </div>
+            <div class="system-status">
+                <div class="status-indicator" id="socket-status">
+                    <span class="dot"></span> Backend: <span class="text">Connecting...</span>
+                </div>
+                <div class="status-indicator" id="esp-status">
+                    <span class="dot"></span> ESP32: <span class="text">Waiting...</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="grid-layout">
+            <!-- Left Column: Core Controls & Live Detection -->
+            <section class="panel col-left">
+                <h2>Live Detection</h2>
+                <div class="detection-display">
+                    <div class="detected-word" id="live-word">---</div>
+                    <div class="confidence">Confidence: <span id="live-confidence">0.0</span>%</div>
+                </div>
+
+                <div class="divider"></div>
+
+                <h2>Dataset Trainer</h2>
+                <div class="recording-status" id="rec-status">
+                    <div class="rec-dot"></div>
+                    <span>IDLE</span>
+                </div>
+
+                <div class="label-form">
+                    <input type="text" id="label-input" placeholder="Enter word label (e.g. Help)">
+                    <button id="save-label-btn" class="btn primary">Save Label to Dataset</button>
+                </div>
+
+                <div class="divider"></div>
+                <button id="train-model-btn" class="btn secondary outline">Retrain ML Model</button>
+            </section>
+
+            <!-- Middle Column: Live Data Stream -->
+            <section class="panel col-mid">
+                <h2>Live EMG Stream</h2>
+                <div class="chart-container">
+                    <canvas id="emgChart"></canvas>
+                </div>
+                <div class="signal-stats">
+                    <div class="stat-box">JAW<br><span id="val-jaw">0.00</span></div>
+                    <div class="stat-box">CHIN<br><span id="val-chin">0.00</span></div>
+                    <div class="stat-box">EAR<br><span id="val-ear">0.00</span></div>
+                </div>
+            </section>
+
+            <!-- Right Column: Logs -->
+            <section class="panel col-right">
+                <h2>System Logs</h2>
+                <div class="log-container" id="log-output">
+                    <!-- Logs go here -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
