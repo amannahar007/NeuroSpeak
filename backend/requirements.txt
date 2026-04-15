@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-socketio
+numpy
+scikit-learn
+tensorflow
+firebase-admin
+python-dotenv
+aiofiles
